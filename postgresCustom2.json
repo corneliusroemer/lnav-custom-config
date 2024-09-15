@@ -1,0 +1,42 @@
+{
+  "$schema": "https://lnav.org/schemas/format-v1.schema.json",
+  "postgres2": {
+    "regex": {
+      "duration": {
+        "pattern": "^(?<timestamp>\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}\\.\\d{3} UTC) (?<ip>\\d+\\.\\d+\\.\\d+\\.\\d+)\\((?<port>\\d+)\\) (?<session_id>[^ ]+) (?<transaction_id>\\d+) (?<operation>[A-Z]+) ?(?<level>[A-Z]+)?:  (?:duration: (?<dur>\\d+\\.\\d+) ms)?(?<body>.*)$"
+      }
+    },
+    "opid-field": "transaction_id",
+    "level-field": "level",
+    "body-field": "body",
+    "value": {
+      "dur": { "kind": "float" },
+      "body": { "kind": "string", "identifier": false },
+      "ip": {
+        "identifier": true,
+        "kind": "string"
+      },
+      "port": {
+        "identifier": true,
+        "kind": "string"
+      },
+      "operation": {
+        "identifier": true,
+        "kind": "string"
+      },
+      "session_id": {
+        "identifier": true,
+        "kind": "string"
+      },
+      "transaction_id": {
+        "identifier": true,
+        "kind": "string"
+      }
+    },
+    "sample": [
+      {
+        "line": "2024-09-15 16:05:39.732 UTC 10.42.1.19(46988) 66e70562.51 871 UPDATE LOG:  duration: 0.218 ms"
+      }
+    ]
+  }
+}
